@@ -17,12 +17,10 @@ public class Game {
     AnimationTimer gameOverChecker;
     Board board;
     Snake snake;
-    int currentScore;
 
     Game() {
         board = new Board();
         snake = board.getSnake();
-        currentScore = 0;
     }
 
     public void startGame() {
@@ -35,13 +33,14 @@ public class Game {
         gameOver();
 
         // Create a Timeline that will be called every 100 milliseconds to animate snake
-        this.snakeAnimator = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
+        this.snakeAnimator = new Timeline(new KeyFrame(Duration.millis(75), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 // checks if the snake head at the apple
                 if (isEaten(board.getApple())) {
                     // if true then new apple will randomly spawn and snake will grow
                     board.generateNewApple();
+                    board.incrementScore();
                     // snake grows and sets the position to be at the end of the tail
                     Rectangle newPart = snake.grow();
                     board.addSnakePart(newPart);
@@ -127,7 +126,9 @@ public class Game {
                 if (hasCollidedWithBoundary(board, snake) || hasCollidedWithTail(snake)) {
                     getSnakeAnimator().stop();
                     getGameOverChecker().stop();
-
+                    if (getBoard().getHighScoreCount() == getBoard().getScoreCount()) {
+                        Util.writeState(getBoard().getHighScoreCount());
+                    }
                 }
             }
 
@@ -144,7 +145,7 @@ public class Game {
             return true;
         } else {
             return false;
-        } // aa
+        }
 
     }
 
@@ -169,6 +170,10 @@ public class Game {
 
     public AnimationTimer getGameOverChecker() {
         return gameOverChecker;
+    }
+
+    public Board getBoard() {
+        return board;
     }
 
 }

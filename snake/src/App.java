@@ -1,6 +1,5 @@
 
 import javafx.application.Application;
-
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -13,7 +12,6 @@ public class App extends Application {
     public void start(Stage stage) {
 
         try {
-
             Game game = new Game();
             game.startGame();
 
