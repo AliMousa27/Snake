@@ -16,14 +16,20 @@ public class Util {
         // and rows * the square size to spawn the apple anywhere on the board
         final int SPACE_BETWEEN_SQUARES = SQUARE_SIZE;
         Random random = new Random();
+
         int randomNumber = random.nextInt(NUMBER_OF_COLMUNS_ROWS);
+        //the while loop is to prevent the apple from spawning on top of the score 
+        while(randomNumber<=2){
+             randomNumber = random.nextInt(NUMBER_OF_COLMUNS_ROWS);
+
+        }
         return randomNumber * SPACE_BETWEEN_SQUARES;
     }
 
     public static int readState() {
         int highScore = 0;
         try {
-            Scanner highScoreGetter = new Scanner(new File("C:/Users/k876y/Desktop/Snake/snake/src/highscore.txt"));
+            Scanner highScoreGetter = new Scanner(new File("C:\\Users\\Jafar\\Desktop\\Snake\\snake\\src\\highscore.txt"));
             highScore = highScoreGetter.nextInt();
             highScoreGetter.close();
 
@@ -36,7 +42,7 @@ public class Util {
 
     public static void writeState(int highscore) {
         try {
-            FileWriter highScoreWriter = new FileWriter("C:/Users/k876y/Desktop/Snake/snake/src/highscore.txt");
+            FileWriter highScoreWriter = new FileWriter("C:\\Users\\Jafar\\Desktop\\Snake\\snake\\src\\highscore.txt");
             highScoreWriter.write(Integer.toString(highscore));
             highScoreWriter.close();
         } catch (IOException e) {

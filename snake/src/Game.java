@@ -47,7 +47,6 @@ public class Game {
                 }
 
                 // move the tail first such that the tail does not lag behind the head to give
-                // the illusion of the snake
                 snake.moveTail();
                 snake.updateSnakePosition(board.getSnake().getDirection());
                 // sets back the canMove variable to be true again such that the snake doesnt go

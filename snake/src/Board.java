@@ -51,8 +51,7 @@ public class Board {
 
         this.boardScene = drawBoard();
         addApple();
-        addSnakeHead();
-
+        initalizeSnake();
     }
 
     // note for self: this method can be more mudlar by adding arguemtns for the
@@ -111,6 +110,13 @@ public class Board {
         scoreText.setEffect(glow);
     }
 
+    public void initalizeSnake(){
+            addSnakeHead();
+            for(int i=0; i<4;i++){
+                addSnakePart(snake.grow());
+            }
+    }
+
     public void addSnakeHead() {
         // the start cooridnate is the square size so that the snake always is precisly
         // on the grid even if we want to change the number of rows and columns
@@ -155,6 +161,9 @@ public class Board {
     }
 
     public void showWindow() {
+        stage.setTitle("Snake");
+        Image icon = new Image("images//lol.png");
+        stage.getIcons().add(icon);
         stage.setScene(this.boardScene);
         stage.setResizable(false);
         stage.show();

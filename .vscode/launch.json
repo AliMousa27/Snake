@@ -15,9 +15,11 @@
             "name": "Launch App",
             "request": "launch",
             "mainClass": "App",
-            "projectName": "Snake_b3bc198c",
-            "vmArgs": "--module-path C:/Users/k876y/Desktop/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml"
+            "projectName": "Snake_e9d2d57f",
+            "vmArgs": "--module-path C:\\Users\\Jafar\\Desktop\\javafx-sdk-19\\lib --add-modules javafx.controls,javafx.fxml"
 
         }
     ]
 }
+
+
