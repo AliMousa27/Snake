@@ -1,4 +1,4 @@
-#text{
+#scoreText{
     -fx-font: 30px Tahoma;
     -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, rgb(12, 176, 176) 0%, rgb(199, 42, 42) 50%);
     -fx-stroke: black;

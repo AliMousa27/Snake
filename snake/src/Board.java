@@ -30,7 +30,7 @@ public class Board {
     private Snake snake;
     private Rectangle apple;
 
-    Board() {
+    Board(String squareColor1, String squareColor2) {
         this.HEIGHT = Util.WINDOWS_HEIGHT_WIDTH;
         this.WIDTH = Util.WINDOWS_HEIGHT_WIDTH;
         this.COLUMNS = Util.NUMBER_OF_COLMUNS_ROWS;
@@ -43,21 +43,19 @@ public class Board {
         this.root = new Group();
         this.stage = new Stage();
 
-        highScoreCount = Util.readState();
+        highScoreCount = Data.readState();
+        // numbers just place the highscore text exactly where it needs to be top right
         highScoreText = new Text(560, 37, Integer.toString(highScoreCount));
-
+        // same here but top left
         scoreCount = 0;
         scoreText = new Text(0, 25, "Score: " + scoreCount);
 
-        this.boardScene = drawBoard();
+        this.boardScene = drawBoard(squareColor1, squareColor2);
         addApple();
         initalizeSnake();
     }
 
-    // note for self: this method can be more mudlar by adding arguemtns for the
-    // square colors and the desierd graphics context effect if more game modes and
-    // skins are to be added
-    public Scene drawBoard() {
+    public Scene drawBoard(String squareColor1, String squareColor2) {
 
         Scene scene = new Scene(root);
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
@@ -73,7 +71,7 @@ public class Board {
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
                 if ((i + j) % 2 == 0) {
-                    gc.setFill(Color.web("#76ded9"));
+                    gc.setFill(Color.web(squareColor1));
                 } else {
                     gc.setFill(Color.AZURE);
                 }
@@ -105,16 +103,17 @@ public class Board {
 
     public void styleScores() {
         highScoreText.setId("highscore");
-        scoreText.setId("text");
+        scoreText.setId("scoreText");
         Glow glow = new Glow(1.0);
         scoreText.setEffect(glow);
     }
 
-    public void initalizeSnake(){
-            addSnakeHead();
-            for(int i=0; i<4;i++){
-                addSnakePart(snake.grow());
-            }
+    public void initalizeSnake() {
+        addSnakeHead();
+        // 3 body parts is the most optimal number for the snake to start as
+        for (int i = 0; i < 4; i++) {
+            addSnakePart(snake.grow());
+        }
     }
 
     public void addSnakeHead() {
@@ -162,6 +161,7 @@ public class Board {
 
     public void showWindow() {
         stage.setTitle("Snake");
+        // CHANGE WHEN U GOT TIME THE NAME FROM LOL TO SOMETHING
         Image icon = new Image("images//lol.png");
         stage.getIcons().add(icon);
         stage.setScene(this.boardScene);

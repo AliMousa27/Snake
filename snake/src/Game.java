@@ -18,12 +18,12 @@ public class Game {
     Board board;
     Snake snake;
 
-    Game() {
-        board = new Board();
+    Game(String squareColor1, String squareColor2) {
+        board = new Board(squareColor1, squareColor2);
         snake = board.getSnake();
     }
 
-    public void startGame() {
+    public void startGame(int gameSpeed) {
         // draws the board and initalizess the stage and scene
         board.showWindow();
         // Detect when a user presses an arrow key and updates snake position
@@ -33,7 +33,7 @@ public class Game {
         gameOver();
 
         // Create a Timeline that will be called every 100 milliseconds to animate snake
-        this.snakeAnimator = new Timeline(new KeyFrame(Duration.millis(75), new EventHandler<ActionEvent>() {
+        this.snakeAnimator = new Timeline(new KeyFrame(Duration.millis(gameSpeed), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 // checks if the snake head at the apple
@@ -122,11 +122,11 @@ public class Game {
 
             @Override
             public void handle(long arg0) {
-                if (hasCollidedWithBoundary(board, snake) || hasCollidedWithTail(snake)) {
+                if (hasCollidedWithBoundary() || hasCollidedWithTail()) {
                     getSnakeAnimator().stop();
                     getGameOverChecker().stop();
                     if (getBoard().getHighScoreCount() == getBoard().getScoreCount()) {
-                        Util.writeState(getBoard().getHighScoreCount());
+                        Data.writeState(getBoard().getHighScoreCount());
                     }
                 }
             }
@@ -135,7 +135,7 @@ public class Game {
         gameOverChecker.start();
     }
 
-    public boolean hasCollidedWithBoundary(Board board, Snake snake) {
+    public boolean hasCollidedWithBoundary() {
         double x = snake.getHead().getX();
         double y = snake.getHead().getY();
         if (x >= board.getWidth() || x < 0) {
@@ -148,7 +148,7 @@ public class Game {
 
     }
 
-    public boolean hasCollidedWithTail(Snake snake) {
+    public boolean hasCollidedWithTail() {
 
         for (int i = 1; i < snake.getTail().size() - 1; i++) {
             Rectangle currentPart = snake.getTail().get(i);
