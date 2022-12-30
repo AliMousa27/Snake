@@ -9,8 +9,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-//handles collison, and runs the game with animation timer
-//randomizes the apple perhaps move and create a random class that does that
 public class Game {
 
     Timeline snakeAnimator;
@@ -24,15 +22,16 @@ public class Game {
     }
 
     public void startGame(int gameSpeed) {
-        // draws the board and initalizess the stage and scene
-        board.showWindow();
+        // sets the scene to not be resizable and adds the scene to stage
+        board.setStage();
         // Detect when a user presses an arrow key and updates snake position
         updateSnakeDirection();
         // starts an animation timer that checks if the snake has collided with anything
         // at every frame
         gameOver();
 
-        // Create a Timeline that will be called every 100 milliseconds to animate snake
+        // Create a Timeline that will be called every however many milliseconds wanted
+        // (game speed) to animate snake
         this.snakeAnimator = new Timeline(new KeyFrame(Duration.millis(gameSpeed), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -150,7 +149,7 @@ public class Game {
 
     public boolean hasCollidedWithTail() {
 
-        for (int i = 1; i < snake.getTail().size() - 1; i++) {
+        for (int i = 1; i < snake.getTail().size(); i++) {
             Rectangle currentPart = snake.getTail().get(i);
             double xForHead = snake.getHead().getX();
             double yForHead = snake.getHead().getY();

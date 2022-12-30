@@ -12,9 +12,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-//sets the scene specfics like size and drawing it and dimensions
-//has a snake and apple in it
 public class Board {
+    // the stage is never intiliased until we set the stage here to be the same
+    // stage as the controller one. therfore whenever the controller starts the game
+    // we set the stage to be the same stage in controlled to avoid a window on top
+    // of another
     private Stage stage;
     private Scene boardScene;
     private Group root;
@@ -41,7 +43,6 @@ public class Board {
         this.apple = new Rectangle(SQUARE_SIZE, SQUARE_SIZE);
 
         this.root = new Group();
-        this.stage = new Stage();
 
         highScoreCount = Data.readState();
         // numbers just place the highscore text exactly where it needs to be top right
@@ -50,7 +51,9 @@ public class Board {
         scoreCount = 0;
         scoreText = new Text(0, 25, "Score: " + scoreCount);
 
+        stage = App.mainStage;
         this.boardScene = drawBoard(squareColor1, squareColor2);
+
         addApple();
         initalizeSnake();
     }
@@ -73,7 +76,7 @@ public class Board {
                 if ((i + j) % 2 == 0) {
                     gc.setFill(Color.web(squareColor1));
                 } else {
-                    gc.setFill(Color.AZURE);
+                    gc.setFill(Color.web(squareColor2));
                 }
                 gc.fillRect(i * SQUARE_SIZE, j * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
 
@@ -159,14 +162,9 @@ public class Board {
         root.getChildren().addAll(apple);
     }
 
-    public void showWindow() {
-        stage.setTitle("Snake");
-        // CHANGE WHEN U GOT TIME THE NAME FROM LOL TO SOMETHING
-        Image icon = new Image("images//lol.png");
-        stage.getIcons().add(icon);
+    public void setStage() {
         stage.setScene(this.boardScene);
         stage.setResizable(false);
-        stage.show();
     }
 
     public Scene getBoardScene() {
@@ -199,6 +197,10 @@ public class Board {
 
     public int getScoreCount() {
         return scoreCount;
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 
 }

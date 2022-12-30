@@ -1,4 +1,5 @@
 import java.beans.EventHandler;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -41,5 +42,27 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Controller {
+    @FXML
+    Button startButton, exiButton;
+    @FXML
+    ImageView imageGif;
+
+    Stage stage = App.mainStage;
+
+    public void start(ActionEvent e) {
+        Game game = new Game("#bd1b5a", "#ff5335");
+
+        game.startGame(Util.NORMAL_SPEED);
+    }
+
+    public void exit(ActionEvent e) {
+        stage.close();
+    }
+
+    public void showMainMenu() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Main Menu.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+    }
 
 }
