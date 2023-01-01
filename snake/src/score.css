@@ -1,0 +1,39 @@
+#scoreText{
+    -fx-font: 30px Tahoma;
+    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, rgb(250, 0,0) 0%, rgb(255, 238, 0) 50%);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}
+
+#highscore{
+    -fx-font: 40px Tahoma;
+    -fx-fill: rgba(250,201,2);
+}
+
+#aButton{    
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 250%, repeat, rgb(237, 133, 13) 0%, rgb(199, 42, 157) 50%);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+
+}   
+
+#upField{
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 500%, rgb(255, 155, 40) 0%, rgb(199, 42, 157) 50%);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}
+#downField{
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 500%, rgb(255, 155, 40) 0%, rgb(199, 42, 157) 50%);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}
+#rightField{
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 500%, rgb(255, 155, 40) 0%, rgb(199, 42, 157) 50%);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}
+#leftField{
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 500%, rgb(255, 155, 40) 0%, rgb(199, 42, 157) 50%);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}

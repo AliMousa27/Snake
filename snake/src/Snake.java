@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 
 import javafx.scene.control.skin.TextInputControlSkin.Direction;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class Snake {
@@ -12,7 +10,6 @@ public class Snake {
     private Direction direction;
     private ArrayList<Rectangle> tail;
     private boolean canMove;
-    private Image headImage;
 
     Snake(int SQUARE_SIZE) {
         this.SQUARE_SIZE = SQUARE_SIZE;
@@ -23,7 +20,7 @@ public class Snake {
     }
 
     public void addNewSnakePart() {
-        Rectangle newSegment = new Rectangle(SQUARE_SIZE, SQUARE_SIZE, Color.web("4775EB"));
+        Rectangle newSegment = new Rectangle(SQUARE_SIZE, SQUARE_SIZE, Color.web("#7f00ff"));// #bd1b5a purple
         tail.add(newSegment);
     }
 
@@ -76,22 +73,18 @@ public class Snake {
 
             case UP:
                 moveUp();
-                changeHeadShape("images//HeadUp.png");
                 break;
 
             case DOWN:
                 moveDown();
-                changeHeadShape("images//HeadDown.png");
                 break;
 
             case LEFT:
                 moveLeft();
-                changeHeadShape("images//HeadLeft.png");
                 break;
 
             case RIGHT:
                 moveRight();
-                changeHeadShape("images//HeadRight.png");
                 break;
             default:
                 break;
@@ -126,11 +119,6 @@ public class Snake {
             currentPart.setX(nextPart.getX());
             currentPart.setY(nextPart.getY());
         }
-    }
-
-    public void changeHeadShape(String newHeadPosition) {
-        this.headImage = new Image(newHeadPosition);
-        getHead().setFill(new ImagePattern(headImage));
     }
 
     public ArrayList<Rectangle> getTail() {

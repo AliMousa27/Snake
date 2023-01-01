@@ -9,46 +9,47 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-//handles collison, and runs the game with animation timer
-//randomizes the apple perhaps move and create a random class that does that
 public class Game {
 
-    Timeline snakeAnimator;
-    AnimationTimer gameOverChecker;
-    Board board;
-    Snake snake;
-    int currentScore;
+    private Timeline snakeAnimator;
+    private AnimationTimer gameOverChecker;
+    private Board board;
+    private Snake snake;
+    private Controls userControls;
 
-    Game() {
-        board = new Board();
+    Game(String squareColor1, String squareColor2) {
+        this.userControls = App.userControls;
+        board = new Board(squareColor1, squareColor2);
         snake = board.getSnake();
-        currentScore = 0;
     }
 
-    public void startGame() {
-        // draws the board and initalizess the stage and scene
-        board.showWindow();
+    public void startGame(int gameSpeed) {
+        // sets the scene to not be resizable and adds the scene to stage
+        board.setStage();
+
         // Detect when a user presses an arrow key and updates snake position
         updateSnakeDirection();
+
         // starts an animation timer that checks if the snake has collided with anything
         // at every frame
         gameOver();
 
-        // Create a Timeline that will be called every 100 milliseconds to animate snake
-        this.snakeAnimator = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
+        // Create a Timeline that will be called every however many milliseconds wanted
+        // (game speed) to animate snake
+        this.snakeAnimator = new Timeline(new KeyFrame(Duration.millis(gameSpeed), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // checks if the snake head at the apple
+                // checks if the snake head ate the apple
                 if (isEaten(board.getApple())) {
                     // if true then new apple will randomly spawn and snake will grow
                     board.generateNewApple();
+                    board.incrementScore();
                     // snake grows and sets the position to be at the end of the tail
                     Rectangle newPart = snake.grow();
                     board.addSnakePart(newPart);
                 }
 
                 // move the tail first such that the tail does not lag behind the head to give
-                // the illusion of the snake
                 snake.moveTail();
                 snake.updateSnakePosition(board.getSnake().getDirection());
                 // sets back the canMove variable to be true again such that the snake doesnt go
@@ -70,42 +71,47 @@ public class Game {
         board.getBoardScene().setOnKeyPressed(event -> {
             KeyCode key = event.getCode();
 
-            // Update the snake's direction based on the key that was pressed
+            Direction newDirection = userControls.getUserInput().get(key);
+            if (newDirection == null) {
+                return;
+            } else {
+                // Update the snake's direction based on the key that was pressed
+                switch (newDirection) {
+                    // only updates the snake position when it can move in the frame and its not
+                    // opposite direction
+                    case UP:
+                        if (snake.getDirection() != Direction.DOWN && snake.getCanMove()) {
+                            snake.setDirection(Direction.UP);
+                            snake.setCanMove(false);
+                        }
+                        break;
 
-            switch (key) {
-                // only updates the snake position when it can move in the frame and its not
-                // opposite direction
-                case UP:
-                    if (snake.getDirection() != Direction.DOWN && snake.getCanMove()) {
-                        snake.setDirection(Direction.UP);
-                        snake.setCanMove(false);
-                    }
-                    break;
+                    case DOWN:
+                        if (snake.getDirection() != Direction.UP && snake.getCanMove()) {
+                            snake.setDirection(Direction.DOWN);
+                            snake.setCanMove(false);
 
-                case DOWN:
-                    if (snake.getDirection() != Direction.UP && snake.getCanMove()) {
-                        snake.setDirection(Direction.DOWN);
-                        snake.setCanMove(false);
+                        }
+                        break;
 
-                    }
-                    break;
+                    case LEFT:
+                        if (snake.getDirection() != Direction.RIGHT && snake.getCanMove()) {
+                            snake.setDirection(Direction.LEFT);
+                            snake.setCanMove(false);
 
-                case LEFT:
-                    if (snake.getDirection() != Direction.RIGHT && snake.getCanMove()) {
-                        snake.setDirection(Direction.LEFT);
-                        snake.setCanMove(false);
+                        }
+                        break;
 
-                    }
-                    break;
-
-                case RIGHT:
-                    if (snake.getDirection() != Direction.LEFT && snake.getCanMove()) {
-                        snake.setDirection(Direction.RIGHT);
-                        snake.setCanMove(false);
-                    }
-                    break;
-                default:
+                    case RIGHT:
+                        if (snake.getDirection() != Direction.LEFT && snake.getCanMove()) {
+                            snake.setDirection(Direction.RIGHT);
+                            snake.setCanMove(false);
+                        }
+                        break;
+                    default:
+                }
             }
+            ;
         });
     }
 
@@ -124,10 +130,12 @@ public class Game {
 
             @Override
             public void handle(long arg0) {
-                if (hasCollidedWithBoundary(board, snake) || hasCollidedWithTail(snake)) {
+                if (hasCollidedWithBoundary() || hasCollidedWithTail()) {
                     getSnakeAnimator().stop();
                     getGameOverChecker().stop();
-
+                    if (getBoard().getHighScoreCount() == getBoard().getScoreCount()) {
+                        Data.writeState(getBoard().getHighScoreCount());
+                    }
                 }
             }
 
@@ -135,7 +143,7 @@ public class Game {
         gameOverChecker.start();
     }
 
-    public boolean hasCollidedWithBoundary(Board board, Snake snake) {
+    public boolean hasCollidedWithBoundary() {
         double x = snake.getHead().getX();
         double y = snake.getHead().getY();
         if (x >= board.getWidth() || x < 0) {
@@ -144,13 +152,13 @@ public class Game {
             return true;
         } else {
             return false;
-        } // aa
+        }
 
     }
 
-    public boolean hasCollidedWithTail(Snake snake) {
+    public boolean hasCollidedWithTail() {
 
-        for (int i = 1; i < snake.getTail().size() - 1; i++) {
+        for (int i = 1; i < snake.getTail().size(); i++) {
             Rectangle currentPart = snake.getTail().get(i);
             double xForHead = snake.getHead().getX();
             double yForHead = snake.getHead().getY();
@@ -169,6 +177,10 @@ public class Game {
 
     public AnimationTimer getGameOverChecker() {
         return gameOverChecker;
+    }
+
+    public Board getBoard() {
+        return board;
     }
 
 }
