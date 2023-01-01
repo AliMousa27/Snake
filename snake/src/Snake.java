@@ -73,22 +73,18 @@ public class Snake {
 
             case UP:
                 moveUp();
-                // changeHeadShape("images//HeadUp.png");
                 break;
 
             case DOWN:
                 moveDown();
-                // changeHeadShape("images//HeadDown.png");
                 break;
 
             case LEFT:
                 moveLeft();
-                // changeHeadShape("images//HeadLeft.png");
                 break;
 
             case RIGHT:
                 moveRight();
-                // changeHeadShape("images//HeadRight.png");
                 break;
             default:
                 break;

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <ImageView fx:id="imageGif" fitHeight="600.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/haha.gif" />
+         </image>
+      </ImageView>
+      <TextField id="rightField" fx:id="rightField" layoutX="225.0" layoutY="300.0" onKeyPressed="#changeText" stylesheets="@score.css">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </TextField>
+      <TextField id="downField" fx:id="downField" layoutX="225.0" layoutY="226.0" onKeyPressed="#changeText" stylesheets="@score.css">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </TextField>
+      <TextField id="leftField" fx:id="leftField" layoutX="225.0" layoutY="377.0" onKeyPressed="#changeText" stylesheets="@score.css">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </TextField>
+      <Text fill="WHITE" layoutX="138.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Up">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="121.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Right">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="117.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Down">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="132.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Left">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Text>
+      <Button id="aButton" fx:id="backButton" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#validateControlsExit" prefHeight="56.0" prefWidth="168.0" stylesheets="@score.css" text="Main Menu">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <TextField id="upField" fx:id="upField" layoutX="225.0" layoutY="160.0" onKeyPressed="#changeText" stylesheets="@score.css">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </TextField>
+   </children>
+</AnchorPane>

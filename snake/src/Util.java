@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class Util {
+
     public final static int NORMAL_SPEED = 75;
     public final static int NUMBER_OF_COLMUNS_ROWS = 25;
     public final static int WINDOWS_HEIGHT_WIDTH = 600;
@@ -14,7 +15,7 @@ public class Util {
         Random random = new Random();
 
         int randomNumber = random.nextInt(NUMBER_OF_COLMUNS_ROWS);
-        // the while loop is to prevent the apple from spawning on top of the score
+        // the while loop is to prevent the apple from spawning on top of the score row
         while (randomNumber <= 2) {
             randomNumber = random.nextInt(NUMBER_OF_COLMUNS_ROWS);
 

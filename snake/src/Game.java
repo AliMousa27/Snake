@@ -11,12 +11,14 @@ import javafx.util.Duration;
 
 public class Game {
 
-    Timeline snakeAnimator;
-    AnimationTimer gameOverChecker;
-    Board board;
-    Snake snake;
+    private Timeline snakeAnimator;
+    private AnimationTimer gameOverChecker;
+    private Board board;
+    private Snake snake;
+    private Controls userControls;
 
     Game(String squareColor1, String squareColor2) {
+        this.userControls = App.userControls;
         board = new Board(squareColor1, squareColor2);
         snake = board.getSnake();
     }
@@ -24,8 +26,10 @@ public class Game {
     public void startGame(int gameSpeed) {
         // sets the scene to not be resizable and adds the scene to stage
         board.setStage();
+
         // Detect when a user presses an arrow key and updates snake position
         updateSnakeDirection();
+
         // starts an animation timer that checks if the snake has collided with anything
         // at every frame
         gameOver();
@@ -35,7 +39,7 @@ public class Game {
         this.snakeAnimator = new Timeline(new KeyFrame(Duration.millis(gameSpeed), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // checks if the snake head at the apple
+                // checks if the snake head ate the apple
                 if (isEaten(board.getApple())) {
                     // if true then new apple will randomly spawn and snake will grow
                     board.generateNewApple();
@@ -67,42 +71,47 @@ public class Game {
         board.getBoardScene().setOnKeyPressed(event -> {
             KeyCode key = event.getCode();
 
-            // Update the snake's direction based on the key that was pressed
+            Direction newDirection = userControls.getUserInput().get(key);
+            if (newDirection == null) {
+                return;
+            } else {
+                // Update the snake's direction based on the key that was pressed
+                switch (newDirection) {
+                    // only updates the snake position when it can move in the frame and its not
+                    // opposite direction
+                    case UP:
+                        if (snake.getDirection() != Direction.DOWN && snake.getCanMove()) {
+                            snake.setDirection(Direction.UP);
+                            snake.setCanMove(false);
+                        }
+                        break;
 
-            switch (key) {
-                // only updates the snake position when it can move in the frame and its not
-                // opposite direction
-                case UP:
-                    if (snake.getDirection() != Direction.DOWN && snake.getCanMove()) {
-                        snake.setDirection(Direction.UP);
-                        snake.setCanMove(false);
-                    }
-                    break;
+                    case DOWN:
+                        if (snake.getDirection() != Direction.UP && snake.getCanMove()) {
+                            snake.setDirection(Direction.DOWN);
+                            snake.setCanMove(false);
 
-                case DOWN:
-                    if (snake.getDirection() != Direction.UP && snake.getCanMove()) {
-                        snake.setDirection(Direction.DOWN);
-                        snake.setCanMove(false);
+                        }
+                        break;
 
-                    }
-                    break;
+                    case LEFT:
+                        if (snake.getDirection() != Direction.RIGHT && snake.getCanMove()) {
+                            snake.setDirection(Direction.LEFT);
+                            snake.setCanMove(false);
 
-                case LEFT:
-                    if (snake.getDirection() != Direction.RIGHT && snake.getCanMove()) {
-                        snake.setDirection(Direction.LEFT);
-                        snake.setCanMove(false);
+                        }
+                        break;
 
-                    }
-                    break;
-
-                case RIGHT:
-                    if (snake.getDirection() != Direction.LEFT && snake.getCanMove()) {
-                        snake.setDirection(Direction.RIGHT);
-                        snake.setCanMove(false);
-                    }
-                    break;
-                default:
+                    case RIGHT:
+                        if (snake.getDirection() != Direction.LEFT && snake.getCanMove()) {
+                            snake.setDirection(Direction.RIGHT);
+                            snake.setCanMove(false);
+                        }
+                        break;
+                    default:
+                }
             }
+            ;
         });
     }
 
