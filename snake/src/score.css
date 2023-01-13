@@ -37,3 +37,53 @@
     -fx-stroke: black;
     -fx-stroke-width: 1;
 }
+
+#optionsLabel{
+    -fx-font: 30px Tahoma;
+    -fx-text-fill: linear-gradient(from 0% 0% to 100% 250%, repeat, rgb(237, 133, 13) 0%, rgb(199, 42, 157) 50%);
+
+}
+
+#volcanoTextButton{
+    -fx-font: 15px Tahoma;
+    -fx-text-fill: red;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 250%, repeat, rgb(109, 57, 5) 0%, rgb(161, 17, 17) 50%);
+    
+}
+
+#iceTextButton{
+    -fx-font: 15px Tahoma;
+    -fx-text-fill: rgb(13, 116, 168);
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 250%, repeat, rgb(255, 255, 255) 0%, rgb(36, 156, 211) 50%);
+    
+}
+
+#grassTextButton{
+    -fx-font: 15px Tahoma;
+    -fx-text-fill: rgb(8, 91, 28);
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 250%, repeat, rgb(13, 123, 21) 0%, rgb(21, 249, 55) 50%);
+}
+#chessTextButton{
+    
+}
+
+.button {
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 250%, repeat, rgb(237, 133, 13) 0%, rgb(199, 42, 157) 50%);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}
+
+
+.choice-box {
+    -fx-background-color:linear-gradient(from 0% 0% to 100% 500%, rgb(255, 155, 40) 0%, rgb(199, 42, 157) 50%);
+  }
+
+.choice-box .context-menu { -fx-background-color: linear-gradient(from 0% 0% to 100% 500%, rgb(215, 127, 27) 0%, rgb(241, 15, 181) 50%);
+}
+.choice-box .menu-item:focused { -fx-background-color: orange }
+.choice-box .menu-item > .label { -fx-text-fill: black
+}                               
+
+

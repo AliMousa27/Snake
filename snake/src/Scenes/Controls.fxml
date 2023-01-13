@@ -16,17 +16,17 @@
             <Image url="@images/haha.gif" />
          </image>
       </ImageView>
-      <TextField id="rightField" fx:id="rightField" layoutX="225.0" layoutY="300.0" onKeyPressed="#changeText" stylesheets="@score.css">
+      <TextField id="rightField" fx:id="rightField" layoutX="225.0" layoutY="300.0" onKeyPressed="#changeControl" stylesheets="@score.css">
          <effect>
             <InnerShadow />
          </effect>
       </TextField>
-      <TextField id="downField" fx:id="downField" layoutX="225.0" layoutY="226.0" onKeyPressed="#changeText" stylesheets="@score.css">
+      <TextField id="downField" fx:id="downField" layoutX="225.0" layoutY="226.0" onKeyPressed="#changeControl" stylesheets="@score.css">
          <effect>
             <InnerShadow />
          </effect>
       </TextField>
-      <TextField id="leftField" fx:id="leftField" layoutX="225.0" layoutY="377.0" onKeyPressed="#changeText" stylesheets="@score.css">
+      <TextField id="leftField" fx:id="leftField" layoutX="225.0" layoutY="377.0" onKeyPressed="#changeControl" stylesheets="@score.css">
          <effect>
             <InnerShadow />
          </effect>
@@ -56,7 +56,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <TextField id="upField" fx:id="upField" layoutX="225.0" layoutY="160.0" onKeyPressed="#changeText" stylesheets="@score.css">
+      <TextField id="upField" fx:id="upField" layoutX="225.0" layoutY="160.0" onKeyPressed="#changeControl" stylesheets="@score.css">
          <effect>
             <InnerShadow />
          </effect>

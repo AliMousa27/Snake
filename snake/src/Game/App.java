@@ -1,11 +1,11 @@
-
 import javafx.application.Application;
-
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
     public static Stage mainStage;
+    // ideally would be in controller only but every attribute there doesnt work/is
+    // null
     public static Controls userControls = new Controls();
 
     public static void main(String[] args) {
@@ -16,16 +16,15 @@ public class App extends Application {
     public void start(Stage stage) {
 
         try {
-            // intiaoizes default controls with no custome user input
-
+            // sets the stage
             mainStage = stage;
             stage.setTitle("Snake");
-            // CHANGE WHEN U GOT TIME THE NAME FROM LOL TO SOMETHING
+            // sets the icon
             Image icon = new Image("images//gameIcon.png");
             stage.getIcons().add(icon);
 
-            Controller controller = new Controller();
-            controller.showMainMenu();
+            new Controller().showMainMenu();
+
             stage.setResizable(false);
             stage.show();
 
