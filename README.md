@@ -17,6 +17,6 @@ This is my first project and I decided to create a snake game by referencing jav
 2. open "Snake" in your IDE of choice
 3. Type the git clone command
 4. Download javafx if you dont have it already
-5. Add needed javafx libraries and the following command in the launch.json
+5. Add needed javafx libraries and the following command in every launch.json you have
 "vmArgs": "--module-path "path to where you have javafx lib" --add-modules javafx.controls,javafx.fxml"
  for more information about adding the javafx library see https://openjfx.io/openjfx-docs/
