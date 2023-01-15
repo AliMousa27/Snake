@@ -9,7 +9,7 @@ public class Data {
         try {
             // this is done so that path isnt hardcoded to the local machine
             String Path = new File("").getAbsolutePath();
-            Scanner highScoreGetter = new Scanner(new File(Path + "/snake/src/highscore.txt"));
+            Scanner highScoreGetter = new Scanner(new File(Path + "/Snake/snake/src/highscore.txt"));
             highScore = highScoreGetter.nextInt();
             highScoreGetter.close();
 
@@ -23,7 +23,7 @@ public class Data {
     public static void writeState(int highscore) {
         try {
             String Path = new File("").getAbsolutePath();
-            FileWriter highScoreWriter = new FileWriter(Path + "/snake/src/highscore.txt");
+            FileWriter highScoreWriter = new FileWriter(Path + "/Snake/snake/src/highscore.txt");
             highScoreWriter.write(Integer.toString(highscore));
             highScoreWriter.close();
         } catch (IOException e) {
