@@ -37,3 +37,5 @@ This is my first project and I decided to create a snake game by referencing jav
 "vmArgs": "--module-path PathToWhereYouHaveJavafxLib --add-modules javafx.controls,javafx.fxml"
 Note: 
 The process may differ between IDE's and OSS'. For more information about adding the javafx library see https://openjfx.io/openjfx-docs/
+
+WARNING: The cloning process may not work for other ides such as intellij or other ides.
